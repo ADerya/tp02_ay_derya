@@ -53,7 +53,7 @@ export class FormulaireComponent implements OnInit {
   ngOnInit(): void {
     this.title = "Formulaire de contact";
     console.log(this.title);
-    const inputElement = document.querySelector('"phone');
+    const inputElement = document.querySelector('#phone');
     if(inputElement) {
          intlTelInput(inputElement, {
            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.19/build/js/utils.js"
