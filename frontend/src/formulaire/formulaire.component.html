@@ -1,61 +1,110 @@
-    <div class="formulaire">
-        <form>
-            <div class="form-group">
-                <label for="civilite">Civilité</label>
-                <select class="civilite" name="civilite" class="form-control" id="civilite" required>
-                    <option value="Monsieur">Monsieur</option>
-                    <option value="Madame">Madame</option>
-                </select>
-            </div>  
-            <div class="form-group">
-                <label for="nom">Nom</label>
-                <input class="nom" name="nom" type="text" class="form-control" id="nom" placeholder="Dupont" required>
-            </div>
-            <div class="form-group">
-                <label for="prenom">Prénom</label>
-                <input class="prenom" name="prenom" type="text" class="form-control" id="prenom" placeholder="Jean" required>
-            </div>
+<div class="flex justify-center">
+    <div class="mt-6 mx-4 max-w-lg p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-xl font-semibold mb-4">Formulaire d'inscription</h2>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input class="email" name="email" type="email" class="form-control" id="email" placeholder="test@example.com" required>
-            </div>
+    <form #myForm>
 
-            <div class="form-group">
-                <label for="telephone">Téléphone</label>
-                <input class="telephone" name="telephone" type="tel" class="form-control" id="telephone" placeholder="0123456789" required>
-            </div>
-
-            <div class="form-group">
-                <label for="adresse">Adresse</label>
-                <input class="adresse" name="adresse" type="text" class="form-control" id="adresse" required>
-            </div>
-
-            <div class="form-group">
-                <label for="codepostal">Code postal</label>
-                <input class="codepostal" name="codepostal" type="text" class="form-control" id="codepostal" required>
-            </div>
-
-            <div class="form-group">
-                <label for="ville">Ville</label>
-                <input class="ville" name="ville" type="text" class="form-control" id="ville" required>
-            </div>
-
-            <div class="form-group">
-                <label for="pays">Pays</label>
-                <input class="pays" name="pays" type="text" class="form-control" id="pays" required>
-                
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input class="password" name="password" type="password" class="form-control" id="password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password2">Confirmer le mot de passe</label>
-                <input class="password2" name="password2" type="password" class="form-control" id="password2" required>
-            </div>
-
-        </form>
+    <!-- Civilité -->
+    <div class="mb-6">
+      <label for="civilite" class="block text-sm font-medium text-gray-700">Civilité</label>
+      <select [(ngModel)]="civilite" (change)="verifierChampModifie('civilite')" id="civilite" name="civilite" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" required>
+        <option value="" disabled selected>Choisissez votre civilité</option>
+        <option value="Madame">Madame</option>
+        <option value="Monsieur">Monsieur</option>
+      </select>
+      <span *ngIf="civiliteInvalide" class="error-message text-red-500 text-sm mt-2 block">Civilité requise.</span>
     </div>
+
+    <!-- Nom et Prénom -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
+        <input [(ngModel)]="nom" (input)="verifierChampModifie('nom')" type="text" id="nom" name="nom" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: Odede" required>
+        <span *ngIf="nomInvalide" class="error-message text-red-500 text-sm mt-2 block">Nom requis.</span>
+      </div>
+      <div>
+        <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom</label>
+        <input [(ngModel)]="prenom" (input)="verifierChampModifie('prenom')" type="text" id="prenom" name="prenom" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: Derya" required>
+        <span *ngIf="prenomInvalide" class="error-message text-red-500 text-sm mt-2 block">Prénom requis.</span>
+      </div>
+    </div>
+
+    <!-- Adresse -->
+    <div class="mb-6">
+      <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse</label>
+      <input [(ngModel)]="adresse" (input)="verifierChampModifie('adresse')" type="text" id="adresse" name="adresse" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: 123 Rue du CFAI" required>
+      <span *ngIf="adresseInvalide" class="error-message text-red-500 text-sm mt-2 block">Adresse requise.</span>
+    </div>
+
+    <!-- Code Postal et Ville -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div>
+            <label for="code_postal" class="block text-sm font-medium text-gray-700">Code Postal</label>
+            <input [(ngModel)]="codepostal" (input)="verifierChampModifie('codepostal')" type="number" inputmode="numeric" min="1" id="code_postal" name="code_postal" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: 67000" required>
+            <span *ngIf="codepostalInvalide" class="error-message text-red-500 text-sm mt-2 block">Code postal requis.</span>
+        </div>
+      <div>
+        <label for="ville" class="block text-sm font-medium text-gray-700">Ville</label>
+        <input [(ngModel)]="ville" (input)="verifierChampModifie('ville')" type="text" id="ville" name="ville" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: Paris" required>
+        <span *ngIf="villeInvalide" class="error-message text-red-500 text-sm mt-2 block">Ville requise.</span>
+      </div>
+    </div>
+
+    <!-- Pays -->
+    <div class="mb-6">
+      <label for="pays" class="block text-sm font-medium text-gray-700">Pays</label>
+      <input [(ngModel)]="pays" (input)="verifierChampModifie('pays')" type="text" id="pays" name="pays" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: France" required>
+      <span *ngIf="paysInvalide" class="error-message text-red-500 text-sm mt-2 block">Pays requis.</span>
+    </div>
+
+    <!-- Adresse Email et Téléphone -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Adresse Email</label>
+            <input [(ngModel)]="email" (input)="verifierChampModifie('email')" type="email" id="email" name="email" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: odede@example.com" required>
+            <div *ngIf="email && !isEmailValid" class="text-sm text-red-500">L'adresse e-mail n'est pas valide.</div>
+            <span *ngIf="emailInvalide" class="error-message text-red-500 text-sm mt-2 block">Email requis.</span>
+        </div>        
+      <div>
+        <label for="telephone" class="block text-sm font-medium text-gray-700">Téléphone</label>
+        <input [(ngModel)]="tel" (input)="verifierChampModifie('tel')" type="tel" id="phone" name="phone" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" required>
+        <span *ngIf="telInvalide" class="error-message text-red-500 text-sm mt-2 block">Téléphone requis.</span>
+      </div>
+    </div>
+
+    <!-- Login -->
+    <div class="mb-6">
+      <label for="login" class="block text-sm font-medium text-gray-700">Login</label>
+      <input [(ngModel)]="login" (input)="verifierChampModifie('login')" type="text" id="login" name="login" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Ex: dede" required>
+      <span *ngIf="loginInvalide" class="error-message text-red-500 text-sm mt-2 block">Login requis.</span>
+    </div>
+
+    <!-- Mot de Passe et Confirmation Mot de Passe -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label for="mot_de_passe" class="block text-sm font-medium text-gray-700">Mot de Passe</label>
+        <input [(ngModel)]="password" (input)="verifierChampModifie('password')" type="password" id="mdp" name="mdp" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Entrez votre mot de passe" required>
+        <span *ngIf="passwordInvalide" class="error-message text-red-500 text-sm mt-2 block">Mot de passe requis.</span>
+      </div>
+      <div>
+        <label for="confirmation_mot_de_passe" class="block text-sm font-medium text-gray-700">Confirmation Mot de Passe</label>
+        <input [(ngModel)]="password2" (input)="verifierChampModifie('password2')" type="password" class="form-control" id="mdp2" name="mdp2" oncopy="return false" onpaste="return false"
+      oncut="return false" class="mt-1 p-2 block w-full border border-gray-300 rounded-md" placeholder="Confirmez votre mot de passe" required>
+      <span *ngIf="password2Invalide" class="error-message text-red-500 text-sm mt-2 block">Confirmation du mot de passe requise.</span>
+      </div>
+    </div>
+
+    <div class="mb-6">
+        <span class="error-message text-red-500 text-sm mt-2 block">{{ errorMdp }}</span>
+        <span class="error-message text-red-500 text-sm mt-2 block">{{ error }}</span>
+    </div>
+
+    <!-- Bouton S'inscrire -->
+    <button (click)="verifierForm ()" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">S'inscrire </button>
+    </form>
+</div>
+
+<div *ngIf="!cacher" class="mt-6 mx-4 max-w-lg p-6 bg-white shadow-md rounded-lg">
+        <app-recapitulatif [client]="client"></app-recapitulatif>
+      </div>
+</div>
