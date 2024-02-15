@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TetiereComponent } from '../tetiere/tetiere.component';
-import { FooterComponent } from '../footer/footer.component';
-import { FormulaireComponent } from '../formulaire/formulaire.component';
-import { RecapitulatifComponent } from '../recapitulatif/recapitulatif.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from  '@angular/common';
+import { FooterComponent } from './components/footer/footer.component';
+import { FormulaireComponent } from './components/formulaire/formulaire.component';
+import { RecapitulatifComponent } from './components/recapitulatif/recapitulatif.component';
+import { TetiereComponent } from './components/tetiere/tetiere.component';
 
 @Component({
   selector: 'app-root',
